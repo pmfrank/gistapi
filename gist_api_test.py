@@ -26,3 +26,12 @@ for gist in gists:
         print(gistcontent.content.decode())
         break # Breaks are just to keep it to the first gist for now
     break
+
+response = requests.get(url='https://api.github.com/search/users?q=pmfrank')
+
+users = json.loads(response.text)
+
+print(users['items'])
+
+for user in users['items']:
+    print(user['id'])
