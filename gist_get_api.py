@@ -14,4 +14,16 @@ if len(users) > 1:
     num = input()
     selection = int(num) - 1
 
-    print(users['items'][selection])
+    gists_api = users['items'][selection]['gists_url'].split('{')[0]
+
+    gists_query = requests.get(url=gists_api)
+    gists = json.loads(gists_query.text)
+
+    if len(gists) > 1:
+        print('You have returned more than one gist. Select one: ')
+        for x, gist in enumerate(gists):
+            for key, value in gist:
+                print(key)
+        # print('You have returned more than one gists. Select one: ')
+        # for x, gist in enumerate (gists['id']):
+        #     print(x+1, gist)
